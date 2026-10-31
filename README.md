@@ -13,4 +13,8 @@ SWCMS PHP8 v.8.5
             - Removed <meta http-equiv="refresh"> auto-reload
             - TemplatePower: #[\AllowDynamicProperties] for PHP 8.2+,
               unserialize() with allowed_classes=false, constructor typo fixed
+            - Extra headers: HSTS, X-XSS-Protection: 0, CORP same-origin
+            - Moved inline style to CSS class (CSP style-src 'self' compliance)
+            - Verified: no superglobals/$_GET-POST usage, no external CDN refs,
+              backdoor eval removed, info.php guarded, include/ + template/ denied
 2021/01/07 : Update Main Template

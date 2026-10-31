@@ -4,3 +4,11 @@ body {
     font-size: 62.5%  /* 1em = 10px */
     color :yellow;
   }
+
+/* Top bar (moved out of inline style so CSP style-src 'self' allows it) */
+.top-1 {
+    height: 20px;
+    background-color: red;
+}
+
+/*New include CSS */
