@@ -1,0 +1,22 @@
+# SWCMS 8.5 - Apache hardening (2026/10/31 security patch)
+ServerSignature Off
+Options -Indexes
+
+# Block access to dotfiles (.git, .htaccess, ...)
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# info.php exposes phpinfo() in debug mode only - deny direct web access
+<Files "info.php">
+    Require all denied
+</Files>
+
+# Security headers (also sent by public/index.php for non-Apache servers)
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "no-referrer"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+    Header always set Content-Security-Policy "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
+</IfModule>

