@@ -1,14 +1,51 @@
-/*Main CSS*/
-body {
-    background-color: blue;
-    font-size: 62.5%  /* 1em = 10px */
-    color :yellow;
-  }
+/* SWCMS 8.5 - modern clean theme (2026/10/31 redesign) */
 
-/* Top bar (moved out of inline style so CSP style-src 'self' allows it) */
-.top-1 {
-    height: 20px;
-    background-color: red;
+:root {
+    --swcms-brand: #6366f1;      /* indigo  */
+    --swcms-brand-2: #8b5cf6;    /* violet  */
+    --swcms-dark: #111827;       /* gray-900 */
+    --swcms-bg: #f6f7fb;
+    --swcms-text: #1f2937;       /* gray-800 */
 }
 
-/*New include CSS */
+body {
+    background-color: var(--swcms-bg);
+    color: var(--swcms-text);
+    font-size: 1rem; /* replaces the old 62.5% root-size hack */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Dark navbar */
+.swcms-navbar {
+    background-color: var(--swcms-dark);
+}
+
+.text-brand-light {
+    color: #a5b4fc; /* indigo-300 */
+}
+
+/* Hero with brand gradient */
+.hero {
+    background: linear-gradient(135deg, var(--swcms-brand) 0%, var(--swcms-brand-2) 100%);
+    color: #fff;
+    padding: 4rem 0;
+}
+
+/* Feature cards */
+.feature-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 6px 20px rgba(17, 24, 39, .08);
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(17, 24, 39, .12);
+}
+
+/* Footer */
+.swcms-footer {
+    background-color: var(--swcms-dark);
+    color: #9ca3af; /* gray-400 */
+}

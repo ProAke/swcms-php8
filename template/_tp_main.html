@@ -3,31 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWCMS PHP {version}</title>
+    <meta name="description" content="SWCMS PHP8 v{version} - lightweight PHP CMS starter, PHP 8.5 ready, security hardened.">
+    <title>SWCMS PHP8 v.{version} - PHP 8.5 Ready</title>
     <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
-    <!-- START BLOCK : Main1 -->   
-    
-    
-    <header>
-        <div class="top-1">x</div>
+    <!-- START BLOCK : Main1 -->
+    <nav class="navbar navbar-expand-lg navbar-dark swcms-navbar">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">SWCMS <span class="text-brand-light">PHP8 v.{version}</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#security">Security</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero text-center">
+        <div class="container py-5">
+            <h1 class="display-4 fw-bold">SWCMS PHP8 <span class="badge rounded-pill text-bg-light align-middle">v.{version}</span></h1>
+            <p class="lead mt-3 mb-4">A lightweight PHP CMS starter — upgraded to version {version}, running clean on <strong>PHP 8.5</strong> with a hardened, fully self-hosted asset pipeline.</p>
+            <a href="#features" class="btn btn-light btn-lg me-2 fw-semibold">Explore features</a>
+            <a href="#security" class="btn btn-outline-light btn-lg fw-semibold">Security</a>
+        </div>
     </header>
-    <div class="container">
-        <h1> SWCMS PHP8 v.{version}</h1>
-         <blockquote class="blockquote">
-            <li>Support PHP 8.5 (SWCMS 8.5)</li>
-            <li>Self-hosted Bootstrap 5.3.8 (no CDN)</li>
-            <li>Security headers + .htaccess hardening</li>
-          </blockquote>
-    </div>
-    <div class="main-block">
-        <p>welocome</p>
-    </div>
 
+    <main class="container py-5">
+        <section id="features" class="mb-5">
+            <h2 class="fw-bold mb-4 text-center">Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">PHP 8.5 Ready</h5>
+                            <p class="card-text">Template engine patched for PHP 8.2+ dynamic properties and fully compatible with PHP 8.5.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Self-hosted Bootstrap 5.3.8</h5>
+                            <p class="card-text">No CDN dependency — assets are vendored locally and integrity-verified from the official npm registry.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Security by default</h5>
+                            <p class="card-text">CSP, HSTS, frame-ancestors and .htaccess hardening protect every page out of the box.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <!-- END BLOCK : Main1 -->    
+        <section id="security" class="mb-5">
+            <h2 class="fw-bold mb-4 text-center">Security hardening</h2>
+            <div class="list-group shadow-sm">
+                <div class="list-group-item">Hidden eval() backdoor removed from the template engine</div>
+                <div class="list-group-item">info.php (phpinfo) guarded — only with SWCMS_DEBUG=1, blocked in .htaccess</div>
+                <div class="list-group-item">Web access denied to include/, template/ and dotfiles</div>
+                <div class="list-group-item">CSP + nosniff + X-Frame-Options + HSTS + Referrer-Policy + Permissions-Policy headers</div>
+                <div class="list-group-item">unserialize() restricted with allowed_classes=false</div>
+            </div>
+        </section>
+
+        <section id="about" class="main-block text-center text-muted mb-5">
+            <p class="mb-0">Welcome to SWCMS v.{version} — welcome home.</p>
+        </section>
+    </main>
+
+    <footer class="swcms-footer text-center py-4">
+        <div class="container">
+            <small>SWCMS {version} &middot; Self-hosted Bootstrap 5.3.8 &middot; Security headers + .htaccess hardening</small>
+        </div>
+    </footer>
+    <!-- END BLOCK : Main1 -->
 
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
 </body>

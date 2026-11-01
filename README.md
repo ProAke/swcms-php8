@@ -17,4 +17,6 @@ SWCMS PHP8 v.8.5
             - Moved inline style to CSS class (CSP style-src 'self' compliance)
             - Verified: no superglobals/$_GET-POST usage, no external CDN refs,
               backdoor eval removed, info.php guarded, include/ + template/ denied
+            - Theme redesign (modern clean): dark navbar, gradient hero,
+              feature cards, security section, footer (Bootstrap 5.3.8 classes)
 2021/01/07 : Update Main Template
